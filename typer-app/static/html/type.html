@@ -1,0 +1,23 @@
+<head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="static/pikme.css">
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <title>Typer</title>
+</head>
+<body style="padding: 16% 0">
+    <center>
+        <img src="static/png/{{ res }}.png" transparent center no-repeat>
+        <h1>{{ feedback }}</h1>
+    </center><br><br>
+    <center><h1>{{ question }}</h1></center>
+    <center>
+        <form action="/type" method="post">
+            <input type="hidden" name="question" value="{{ question }}">
+            <input type="hidden" name="start_time" value="{{ start_time }}">
+            <input name="answer" style="font-family: medodica; font-size: xxx-large; color: white" autocomplete="off" autofocus onfocus="this.select()">
+        </form>
+        <form action="/user" method="get">
+            <button type="submit" style="font-family: medodica; font-size: xxx-large; color: white">Profile</button>
+        </form>
+    </center>
+</body>

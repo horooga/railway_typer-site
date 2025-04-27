@@ -1,0 +1,21 @@
+<head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="static/pikme.css">
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <title>Typer</title>
+</head>
+<body style="padding: 18% 0">
+    <center><h1>Top players:</h1></center>
+    <center>
+        {% if top_users %}
+            {% for n in range(top_size) %}
+            <h1>{{ n }}. {{ top_users[n]["username"] }}: Right - {{ top_users[n]["stats"][0] }}, Wrong - {{ top_users[n]["stats"][1] }} Skipped - {{ top_users[n]["stats"][2] }}</h1>
+            {% endfor %}
+        {% else %}
+            <h1>There is no users now :(</h1>
+        {% endif %}
+        <form action="/user" method="get">
+            <button type="submit" style="font-family: medodica; font-size: xxx-large; color: white">Profile</button>
+        </form>
+    </center>
+</body>

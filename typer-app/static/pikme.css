@@ -1,0 +1,45 @@
+@font-face {
+    font-family: "medodica";
+    src: url("medodica.otf");
+}
+
+*:focus {
+    outline: none;
+}
+
+body {
+    font-family: "medodica";
+    color: white;
+    overflow: hidden;
+    background-color: #404040;
+    margin: 3% 30%;
+    border: solid 3px black;
+}
+
+img {
+    width: 200px;
+    height: 100px;
+    background-size: contain;
+    margin: 0;
+}
+
+button {
+    cursor: pointer;
+    margin: 0;
+    border: 0;
+    padding: 2% 6%;
+    background: transparent url("png/start.png") center no-repeat;
+    background-size: contain;
+}
+
+input {
+    text-align: center;
+    margin: 0;
+    border: 0;
+    padding: 2% 10%;
+    background: transparent url("png/input.png") center no-repeat;
+    background-size: contain;
+
+}
+
+

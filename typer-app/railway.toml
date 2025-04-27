@@ -1,0 +1,8 @@
+[build]
+builder = "DOCKERFILE"
+dockerfilePath = "/typer/Dockerfile"
+
+[deploy]
+healthcheckPath = "/ping"
+restartPolicyMaxRetries = 10
+restartPolicyType = "ON_FAILURE"
