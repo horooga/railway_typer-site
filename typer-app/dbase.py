@@ -1,5 +1,5 @@
 import motor.motor_asyncio
-import async
+import asyncio
 
 MONGO_URI = "https://mongodb-production-24fe.up.railway.app?retryWrites=true&w=majority"
 
