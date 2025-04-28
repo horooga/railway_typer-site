@@ -9,7 +9,7 @@
     <center>
         {% if top_users %}
             {% for n in range(top_size) %}
-            <h1>{{ n }}. {{ top_users[n]["username"] }}: Right - {{ top_users[n]["stats"][0] }}, Wrong - {{ top_users[n]["stats"][1] }} Skipped - {{ top_users[n]["stats"][2] }}</h1>
+            <h1>{{ n + 1 }}. {{ top_users[n]["username"] }}: Right - {{ top_users[n]["stats"][0] }}, Wrong - {{ top_users[n]["stats"][1] }} Skipped - {{ top_users[n]["stats"][2] }}</h1>
             {% endfor %}
         {% else %}
             <h1>There is no users now :(</h1>
