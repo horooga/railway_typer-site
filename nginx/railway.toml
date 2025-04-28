@@ -1,8 +1,0 @@
-[build]
-builder = "DOCKERFILE"
-dockerfilePath = "/nginx/Dockerfile"
-
-[deploy]
-healthcheckPath = "/ping"
-restartPolicyMaxRetries = 10
-restartPolicyType = "ON_FAILURE"

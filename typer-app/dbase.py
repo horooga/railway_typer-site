@@ -1,7 +1,7 @@
 import motor.motor_asyncio
-import asyncio
+import async
 
-MONGO_URI = "mongodb://mongodb:27017?retryWrites=true&w=majority"
+MONGO_URI = "https://mongodb-production-24fe.up.railway.app?retryWrites=true&w=majority"
 
 client = motor.motor_asyncio.AsyncIOMotorClient(MONGO_URI)
 

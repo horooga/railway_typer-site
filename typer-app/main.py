@@ -55,10 +55,11 @@ def validate(username: str, password: str) -> [str]:
     return errors
 
 
-def make_jwt(nickname: str) -> str:
+def make_jwt(nickname: str, start_time: str) -> str:
     return jwt.encode(
         {
             "username": nickname,
+            "question-start": start_time,
             "exp": time.time() + 3600,
         },
         JWT_SECRET,
@@ -71,6 +72,18 @@ def get_username_from_token(token: str = Cookie(default=None)) -> str | None:
         decoded_token = jwt.decode(token, JWT_SECRET, algorithms=[JWT_ALGORITHM])
         return (
             decoded_token["username"] if decoded_token["exp"] >= time.time() else None
+        )
+    except:
+        return None
+
+
+def get_start_time_from_token(token: str = Cookie(default=None)) -> str | None:
+    try:
+        decoded_token = jwt.decode(token, JWT_SECRET, algorithms=[JWT_ALGORITHM])
+        return (
+            decoded_token["question-start"]
+            if decoded_token["exp"] >= time.time()
+            else None
         )
     except:
         return None
@@ -113,7 +126,7 @@ async def user_login(request: Request, username: str = Form(), password: str = F
         )
     if PASSWORD_CONTEXT.verify(password, user["password"]):
         response = RedirectResponse("/user", status_code=302)
-        response.set_cookie("token", make_jwt(username))
+        response.set_cookie("token", make_jwt(username, "0"))
         return response
     return templates.TemplateResponse(
         "login.html",
@@ -152,12 +165,12 @@ async def type(
     request: Request,
     question: str = Form(default=None),
     answer: str = Form(default=None),
-    start_time: str = Form(default=None),
+    start_time: str = Depends(get_start_time_from_token),
     auth_username: str = Depends(get_username_from_token),
 ):
     if not auth_username:
         return RedirectResponse("/login", status_code=302)
-    if start_time:
+    if question:
         right_answer: bool = answer == answers[question]
         stats = await user_stats_get(auth_username)
         if not stats:
@@ -170,7 +183,7 @@ async def type(
                 stats[2] + int(not answer),
             ],
         )
-        return templates.TemplateResponse(
+        response = templates.TemplateResponse(
             "type.html",
             {
                 "request": request,
@@ -179,18 +192,18 @@ async def type(
                 "feedback": f"Time elapsed: {str(round(time.time() - float(start_time), 3))} seconds"
                 if right_answer
                 else f"Answer was: {answers[question]}",
-                "start_time": str(round(time.time(), 3)),
             },
         )
     else:
-        return templates.TemplateResponse(
+        response = templates.TemplateResponse(
             "first_type.html",
             {
                 "request": request,
                 "question": questions[random.randrange(questions_amount)],
-                "start_time": str(round(time.time())),
             },
         )
+    response.set_cookie("token", make_jwt(auth_username, str(round(time.time(), 3))))
+    return response
 
 
 @app.get("/user", tags=["authentificated"])
