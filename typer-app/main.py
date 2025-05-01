@@ -55,11 +55,11 @@ def validate(username: str, password: str) -> [str]:
     return errors
 
 
-def make_jwt(nickname: str, start_time: str) -> str:
+def make_jwt(nickname: str, question_start: str) -> str:
     return jwt.encode(
         {
-            "username": nickname,
-            "question-start": start_time,
+            "usrnm": nickname,
+            "qstnstrt": question_start,
             "exp": time.time() + 3600,
         },
         JWT_SECRET,
@@ -67,24 +67,10 @@ def make_jwt(nickname: str, start_time: str) -> str:
     )
 
 
-def get_username_from_token(token: str = Cookie(default=None)) -> str | None:
+def decode_token(token: str = Cookie(default=None)) -> dict | None:
     try:
         decoded_token = jwt.decode(token, JWT_SECRET, algorithms=[JWT_ALGORITHM])
-        return (
-            decoded_token["username"] if decoded_token["exp"] >= time.time() else None
-        )
-    except:
-        return None
-
-
-def get_start_time_from_token(token: str = Cookie(default=None)) -> str | None:
-    try:
-        decoded_token = jwt.decode(token, JWT_SECRET, algorithms=[JWT_ALGORITHM])
-        return (
-            decoded_token["question-start"]
-            if decoded_token["exp"] >= time.time()
-            else None
-        )
+        return decoded_token if decoded_token["exp"] >= time.time() else None
     except:
         return None
 
@@ -95,7 +81,7 @@ async def start():
 
 
 @app.get("/login")
-async def login(request: Request, auth_username=Depends(get_username_from_token)):
+async def login(request: Request, auth_username=Depends(decode_token)):
     if auth_username:
         return RedirectResponse("/user", status_code=302)
     return templates.TemplateResponse(
@@ -165,12 +151,13 @@ async def type(
     request: Request,
     question: str = Form(default=None),
     answer: str = Form(default=None),
-    start_time: str = Depends(get_start_time_from_token),
-    auth_username: str = Depends(get_username_from_token),
+    auth_user: str = Depends(decode_token),
 ):
-    if not auth_username:
+    if not auth_user:
         return RedirectResponse("/login", status_code=302)
     if question:
+        auth_username = auth_user["usrnm"]
+        auth_questionstart = auth_user["qstnstrt"]
         right_answer: bool = answer == answers[question]
         stats = await user_stats_get(auth_username)
         if not stats:
@@ -189,7 +176,7 @@ async def type(
                 "request": request,
                 "question": questions[random.randrange(questions_amount)],
                 "res": "skip" if not answer else "true" if right_answer else "false",
-                "feedback": f"Time elapsed: {str(round(time.time() - float(start_time), 3))} seconds"
+                "feedback": f"Time elapsed: {str(round(time.time() - float(auth_questionstart), 3))} seconds"
                 if right_answer
                 else f"Answer was: {answers[question]}",
             },
@@ -207,11 +194,10 @@ async def type(
 
 
 @app.get("/user", tags=["authentificated"])
-async def get_stats(
-    request: Request, auth_username: str = Depends(get_username_from_token)
-):
-    if not auth_username:
+async def get_stats(request: Request, auth_user: str = Depends(decode_token)):
+    if not auth_user:
         return RedirectResponse("/login", status_code=302)
+    auth_username = auth_user["usrnm"]
     user_stats = await user_stats_get(auth_username)
     if user_stats:
         return templates.TemplateResponse(

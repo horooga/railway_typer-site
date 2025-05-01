@@ -3,17 +3,15 @@
     src: url("medodica.otf");
 }
 
-*:focus {
-    outline: none;
-}
-
 body {
     font-family: "medodica";
+    display: flex;
     color: white;
     overflow: hidden;
     background-color: #404040;
     margin: 3% 30%;
     border: solid 3px black;
+    box-sizing: border-box;
 }
 
 img {
@@ -30,6 +28,28 @@ button {
     padding: 2% 6%;
     background: transparent url("png/start.png") center no-repeat;
     background-size: contain;
+    box-shadow: 
+        0 0 0 4px #333,
+        0 6px 0 4px #333,
+        0 12px 0 4px #333;
+    transition: all 0.2s;
+}
+
+button:hover {
+    background-color: #45a049;
+    transform: translateY(2px);
+    box-shadow: 
+        0 0 0 4px #333,
+        0 4px 0 4px #333,
+        0 8px 0 4px #333;
+}
+
+button:active {
+    transform: translateY(6px);
+    box-shadow: 
+        0 0 0 4px #333,
+        0 0px 0 4px #333,
+        0 2px 0 4px #333;
 }
 
 input {
@@ -39,7 +59,18 @@ input {
     padding: 2% 10%;
     background: transparent url("png/input.png") center no-repeat;
     background-size: contain;
-
+    box-shadow: 
+        0 0 0 4px #333,
+        0 6px 0 4px #333,
+        0 12px 0 4px #333;
+    transition: all 0.2s;
 }
 
-
+input:focus {
+    outline: none;
+    transform: translateY(2px);
+    box-shadow: 
+        0 0 0 4px #333,
+        0 4px 0 4px #333,
+        0 8px 0 4px #333;
+}
