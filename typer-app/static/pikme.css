@@ -5,13 +5,17 @@
 
 body {
     font-family: "medodica";
-    display: flex;
     color: white;
-    overflow: hidden;
-    background-color: #404040;
-    margin: 3% 30%;
-    border: solid 3px black;
+    background-color: #202020;
     box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+}
+
+.page {
+    margin: 0 15%;
+    background-color: #909090;
+    border-radius: 5%;
 }
 
 img {
@@ -21,17 +25,18 @@ img {
     margin: 0;
 }
 
+form {
+    align-items: center;
+}
+
 button {
+    margin: 5%;
+    font-family: "medodica";
+    background-color: #b7b7b7;
     cursor: pointer;
-    margin: 0;
-    border: 0;
-    padding: 2% 6%;
-    background: transparent url("png/start.png") center no-repeat;
-    background-size: contain;
     box-shadow: 
-        0 0 0 4px #333,
-        0 6px 0 4px #333,
-        0 12px 0 4px #333;
+        0 6px 0 0 #7e7e7e,
+        0 12px 0 0 #7e7e7e;
     transition: all 0.2s;
 }
 
@@ -39,30 +44,22 @@ button:hover {
     background-color: #45a049;
     transform: translateY(2px);
     box-shadow: 
-        0 0 0 4px #333,
-        0 4px 0 4px #333,
-        0 8px 0 4px #333;
+        0 3px 0 0 #7e7e7e,
+        0 6px 0 0 #7e7e7e;
 }
 
 button:active {
     transform: translateY(6px);
     box-shadow: 
-        0 0 0 4px #333,
-        0 0px 0 4px #333,
-        0 2px 0 4px #333;
+        0 2px 0 0 #7e7e7e;
 }
 
 input {
-    text-align: center;
-    margin: 0;
-    border: 0;
-    padding: 2% 10%;
-    background: transparent url("png/input.png") center no-repeat;
-    background-size: contain;
+    margin: 5%;
+    background-color: #b7b7b7;
     box-shadow: 
-        0 0 0 4px #333,
-        0 6px 0 4px #333,
-        0 12px 0 4px #333;
+        0 6px 0 0 #7e7e7e,
+        0 12px 0 0 #7e7e7e;
     transition: all 0.2s;
 }
 
@@ -70,7 +67,6 @@ input:focus {
     outline: none;
     transform: translateY(2px);
     box-shadow: 
-        0 0 0 4px #333,
-        0 4px 0 4px #333,
-        0 8px 0 4px #333;
+        0 3px 0 0 #7e7e7e,
+        0 6px 0 0 #7e7e7e;
 }

@@ -153,12 +153,13 @@ async def type(
     answer: str = Form(default=None),
     auth_user: str = Depends(decode_token),
 ):
+    auth_username = auth_user["usrnm"]
+    auth_questionstart = auth_user["qstnstrt"]
+    time_elapsed = str(round(time.time() - float(auth_questionstart), 3))
     if not auth_user:
         return RedirectResponse("/login", status_code=302)
     if question:
-        auth_username = auth_user["usrnm"]
-        auth_questionstart = auth_user["qstnstrt"]
-        right_answer: bool = answer == answers[question]
+        right_answer: bool = answer.lower() == answers[question]
         stats = await user_stats_get(auth_username)
         if not stats:
             return RedirectResponse("/login", status_code=302)
@@ -176,7 +177,7 @@ async def type(
                 "request": request,
                 "question": questions[random.randrange(questions_amount)],
                 "res": "skip" if not answer else "true" if right_answer else "false",
-                "feedback": f"Time elapsed: {str(round(time.time() - float(auth_questionstart), 3))} seconds"
+                "feedback": f"Time elapsed: {time_elapsed} seconds"
                 if right_answer
                 else f"Answer was: {answers[question]}",
             },

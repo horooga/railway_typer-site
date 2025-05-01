@@ -4,13 +4,15 @@
     <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
     <title>Typer</title>
 </head>
-<body style="padding: 18% 0">
-    <center><h1 style="color: #e00000">{{ feedback }}</h1></center>
-    <center>
-        <form action="/user-login" method="post">
-            <input type="text" name="username" placeholder="username" style="font-family: medodica; font-size: xxx-large; margin-bottom: 1%; color: white" autocomplete="off"><br>
-            <input type="password" name="password" placeholder="password" style="font-family: medodica; font-size: xxx-large; margin-bottom: 1%; color: white" autocomplete="off"><br>
-            <button type="submit" style="font-family: medodica; font-size: xxx-large; color: white">Log in</button>
-        </form>
-    </center>
+<body>
+    <div class="page">
+        <center><h1 style="color: #e00000">{{ feedback }}</h1></center>
+        <center>
+            <form action="/user-login" method="post">
+                <input name="username" placeholder="username" style="font-family: medodica; font-size: xxx-large; color: white" autocomplete="off"><br>
+                <input name="password" placeholder="password" style="font-family: medodica; font-size: xxx-large; color: white" autocomplete="off"><br>
+                <button type="submit" style="width: 30%; height: 10%; font-family: medodica; font-size: xxx-large; color: white">Log in</button>
+            </form>
+        </center>
+    </div>
 </body>
