@@ -75,6 +75,11 @@ def decode_token(token: str = Cookie(default=None)) -> dict | None:
         return None
 
 
+@app.get("/ping")
+async def ping():
+    return {"status": "ok"}
+
+
 @app.get("/")
 async def start():
     return FileResponse("static/html/start.html")
@@ -179,7 +184,7 @@ async def type(
                 "res": "skip" if not answer else "true" if right_answer else "false",
                 "feedback": f"Time elapsed: {time_elapsed} seconds"
                 if right_answer
-                else f"Answer was: {answers[question]}",
+                else f"Answer was: {answers[question].capitalize()}",
             },
         )
     else:

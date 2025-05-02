@@ -1,3 +1,6 @@
 [build]
 builder = "DOCKERFILE"
 dockerfilePath = "/typer-app/Dockerfile"
+
+[deploy]
+healthcheckPath = "/ping"

@@ -1,10 +1,7 @@
 import motor.motor_asyncio
+import os
 
-MONGO_URI = (
-    "mongodb://mongo:xTCmNXshrfYxckYARpjXofZtSSlWjzHT@turntable.proxy.rlwy.net:51591"
-)
-
-client = motor.motor_asyncio.AsyncIOMotorClient(MONGO_URI)
+client = motor.motor_asyncio.AsyncIOMotorClient(os.getenv("MONGO_PUBLIC_URL"))
 
 db = client.get_database("app")
 users = db.get_collection("users")

@@ -1,72 +1,121 @@
+
 @font-face {
     font-family: "medodica";
     src: url("medodica.otf");
 }
 
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
 body {
-    font-family: "medodica";
+    font-family: "medodica", monospace, sans-serif;
     color: white;
     background-color: #202020;
-    box-sizing: border-box;
+    display: flex;
     align-items: center;
     justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    user-select: none;
 }
 
 .page {
     margin: 0 15%;
     background-color: #909090;
-    border-radius: 5%;
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow:
+        4px 4px 0 #7e7e7e,
+        8px 8px 0 #606060;
+    max-width: 600px;
+    text-align: center;
 }
 
 img {
     width: 200px;
     height: 100px;
-    background-size: contain;
-    margin: 0;
+    object-fit: contain;
+    image-rendering: pixelated;
+    margin: 0 auto 1rem;
+    display: block;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin: 0.5rem 0;
+    text-shadow:
+        2px 2px 0 #7e7e7e;
 }
 
 form {
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    gap: 1rem;
+}
+
+input {
+    width: 100%;
+    max-width: 500px;
+    font-family: "medodica", monospace, sans-serif;
+    font-size: 3rem;
+    color: white;
+    background-color: #b7b7b7;
+    border: 4px solid #7e7e7e;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    box-shadow:
+        4px 4px 0 #7e7e7e;
+    outline: none;
+    transition: all 0.15s ease-in-out;
+    text-align: center;
+    image-rendering: pixelated;
+}
+
+input:focus {
+    background-color: #909090;
+    border-color: #45a049;
+    box-shadow:
+        2px 2px 0 #45a049,
+        4px 4px 0 #7e7e7e;
+    transform: translateY(1px);
 }
 
 button {
-    margin: 5%;
-    font-family: "medodica";
+    width: 30%;
+    max-width: 200px;
+    height: 60px;
+    font-family: "medodica", monospace, sans-serif;
+    font-size: 2.5rem;
+    color: white;
     background-color: #b7b7b7;
+    border: 4px solid #7e7e7e;
+    border-radius: 4px;
+    box-shadow:
+        6px 6px 0 #7e7e7e,
+        12px 12px 0 #606060;
     cursor: pointer;
-    box-shadow: 
-        0 6px 0 0 #7e7e7e,
-        0 12px 0 0 #7e7e7e;
-    transition: all 0.2s;
+    transition: all 0.2s ease-in-out;
+    user-select: none;
+    text-shadow: 1px 1px 0 #606060;
 }
 
 button:hover {
     background-color: #45a049;
+    border-color: #2d6f2d;
+    box-shadow:
+        3px 3px 0 #2d6f2d,
+        6px 6px 0 #7e7e7e;
     transform: translateY(2px);
-    box-shadow: 
-        0 3px 0 0 #7e7e7e,
-        0 6px 0 0 #7e7e7e;
 }
 
 button:active {
     transform: translateY(6px);
-    box-shadow: 
-        0 2px 0 0 #7e7e7e;
+    box-shadow:
+        1px 1px 0 #2d6f2d;
 }
 
-input {
-    margin: 5%;
-    background-color: #b7b7b7;
-    box-shadow: 
-        0 6px 0 0 #7e7e7e,
-        0 12px 0 0 #7e7e7e;
-    transition: all 0.2s;
-}
 
-input:focus {
-    outline: none;
-    transform: translateY(2px);
-    box-shadow: 
-        0 3px 0 0 #7e7e7e,
-        0 6px 0 0 #7e7e7e;
-}

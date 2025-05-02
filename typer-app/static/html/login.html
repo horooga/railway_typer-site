@@ -1,18 +1,30 @@
 <head>
     <meta charset="UTF-8" />
-    <link rel="stylesheet" href="static/pikme.css">
-    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <link rel="stylesheet" href="static/pikme.css" />
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico" />
     <title>Typer</title>
 </head>
 <body>
     <div class="page">
-        <center><h1 style="color: #e00000">{{ feedback }}</h1></center>
-        <center>
-            <form action="/user-login" method="post">
-                <input name="username" placeholder="username" style="font-family: medodica; font-size: xxx-large; color: white" autocomplete="off"><br>
-                <input name="password" placeholder="password" style="font-family: medodica; font-size: xxx-large; color: white" autocomplete="off"><br>
-                <button type="submit" style="width: 30%; height: 10%; font-family: medodica; font-size: xxx-large; color: white">Log in</button>
-            </form>
-        </center>
+        {% if feedback %}
+            <h1>{{ feedback }}</h1>
+        {% endif %}
+
+        <form action="/user-login" method="post" autocomplete="off">
+            <input
+                type="text"
+                name="username"
+                placeholder="username"
+                required
+            />
+            <input
+                type="password"
+                name="password"
+                placeholder="password"
+                required
+            />
+            <button type="submit">Log in</button>
+        </form>
     </div>
 </body>
+
