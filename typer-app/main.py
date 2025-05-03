@@ -39,9 +39,9 @@ def validate(username: str, password: str) -> [str]:
     if not username:
         return ["Username is empty!"]
     elif len(username) < 5:
-        errors.append("Username should be longer then 5 symbols!")
+        errors.append("Username should be longer than 5 symbols!")
     elif len(username) > 20:
-        errors.append("Username should be shorter then 20 symbols!")
+        errors.append("Username should be shorter than 20 symbols!")
     elif not username.isalnum():
         errors.append("Username should contain only letters and numbers")
     if not password:
